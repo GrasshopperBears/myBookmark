@@ -1,13 +1,26 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png" />
-    <router-view />
+    <span v-if="show">{{ my }}</span>
+    <button v-on:click="btnClicked">Button</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
+  data() {
+    return { x: 1, y: 2, show: true };
+  },
+  methods: {
+    btnClicked(event) {
+      this.show = !this.show;
+    },
+  },
+  computed: {
+    my() {
+      return this.x + this.y;
+    },
+  },
 };
 </script>
 
