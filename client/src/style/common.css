@@ -1,0 +1,146 @@
+html,
+body,
+div,
+span,
+iframe,
+p,
+img,
+small,
+strong,
+sub,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+form,
+label,
+table,
+caption,
+tbody,
+thead,
+tr,
+th,
+td,
+canvas,
+figure,
+footer,
+header,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  font-family: 'IBMPlexSansKR';
+}
+
+body {
+  line-height: 1;
+}
+
+figure,
+footer,
+header,
+menu,
+nav,
+section {
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  color: inherit;
+  background: transparent;
+  vertical-align: baseline;
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: initial;
+}
+
+input {
+  border: none;
+  font-family: inherit;
+}
+
+button,
+input[type='button'] {
+  outline: none;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  font-family: 'IBMPlexSansKR';
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+textarea {
+  border: 1px solid rgba(128, 128, 128, 0.548);
+  font-family: 'IBMPlexSansKR';
+}
+
+textarea:focus {
+  outline: none;
+}
+
+* {
+  scrollbar-width: 5px;
+  scrollbar-color: rgb(170, 170, 170) transparent;
+}
+
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(170, 170, 170);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(140, 140, 140);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: rgb(110, 110, 110);
+}
+
+@font-face {
+  font-family: 'IBMPlexSansKR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff');
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: 'IBMPlexSansKR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'IBMPlexSansKR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-SemiBold.woff') format('woff');
+  font-weight: bold;
+}

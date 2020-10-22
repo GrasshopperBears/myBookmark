@@ -1,36 +1,24 @@
 <template>
   <div id="app">
-    <span v-if="show">{{ my }}</span>
-    <button v-on:click="btnClicked">Button</button>
+    <Sidebar></Sidebar>
+    <div class="service">
+      <div class="header">책갈피</div>
+      <div>내용</div>
+    </div>
   </div>
 </template>
 
 <script>
+import Sidebar from './components/Sidebar';
+
 export default {
   name: 'App',
-  data() {
-    return { x: 1, y: 2, show: true };
-  },
-  methods: {
-    btnClicked(event) {
-      this.show = !this.show;
-    },
-  },
-  computed: {
-    my() {
-      return this.x + this.y;
-    },
-  },
+  components: { Sidebar },
 };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.service {
+  margin-left: 3.2rem;
 }
 </style>
