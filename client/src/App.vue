@@ -24,4 +24,7 @@ export default {
 .service {
   margin-left: 3.2rem;
 }
+.service-container {
+  padding: 2rem;
+}
 </style>

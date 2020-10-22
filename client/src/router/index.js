@@ -1,8 +1,20 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import AddBookmark from '../components/addBookmark/AddBookmark';
+import RandomBookmark from '../components/randomBookmark/RandomBookmark';
+import BookmarkCalendar from '../components/bookmarkCalendar/BookmarkCalendar';
+import MyBookmark from '../components/myBookmark/MyBookmark';
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [{}],
+  routes: [
+    {
+      path: '/',
+      component: AddBookmark,
+    },
+    { path: '/random', component: RandomBookmark },
+    { path: '/calendar', component: BookmarkCalendar },
+    { path: '/my-bookmark', component: MyBookmark },
+  ],
 });

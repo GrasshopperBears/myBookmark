@@ -32,6 +32,7 @@ export default {
       sidebarTextShown: false,
       modeNames: ['추가하기', '어떤 글', '달력', '내 책갈피'],
       iconSrcList: [AddIcon, RandomIcon, CalendarIcon, BookIcon],
+      routers: ['/', '/random', 'calendar', '/my-bookmark'],
       selectedIndex: 0,
     };
   },
@@ -43,7 +44,10 @@ export default {
       this.sidebarTextShown = false;
     },
     changeSelectMode(index) {
-      this.selectedIndex = index;
+      if (index !== this.selectedIndex) {
+        this.selectedIndex = index;
+        this.$router.push(this.routers[index]);
+      }
     },
   },
 };
