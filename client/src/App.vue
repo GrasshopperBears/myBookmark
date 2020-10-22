@@ -2,18 +2,21 @@
   <div id="app">
     <Sidebar></Sidebar>
     <div class="service">
-      <div class="header">책갈피</div>
-      <div>내용</div>
+      <Header></Header>
+      <div class="service-container">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Sidebar from './components/Sidebar';
+import Header from './components/Header';
 
 export default {
   name: 'App',
-  components: { Sidebar },
+  components: { Sidebar, Header },
 };
 </script>
 

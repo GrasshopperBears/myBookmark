@@ -89,7 +89,6 @@ export default {
 }
 .sidebar__text:hover {
   text-decoration: underline;
-  text-underline-position: under;
 }
 .slide-right-enter-active {
   transition: all 0.2s ease;

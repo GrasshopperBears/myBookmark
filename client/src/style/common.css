@@ -37,7 +37,7 @@ section {
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
-  font-family: 'IBMPlexSansKR';
+  font-family: 'Dovemayo-Medium';
 }
 
 body {
@@ -66,7 +66,6 @@ a {
   vertical-align: baseline;
   text-decoration: none;
 }
-
 a:visited {
   text-decoration: none;
   color: initial;
@@ -76,7 +75,6 @@ input {
   border: none;
   font-family: inherit;
 }
-
 button,
 input[type='button'] {
   outline: none;
@@ -86,7 +84,6 @@ input[type='button'] {
   font-family: 'IBMPlexSansKR';
   cursor: pointer;
 }
-
 button:disabled {
   cursor: not-allowed;
 }
@@ -95,7 +92,6 @@ textarea {
   border: 1px solid rgba(128, 128, 128, 0.548);
   font-family: 'IBMPlexSansKR';
 }
-
 textarea:focus {
   outline: none;
 }
@@ -104,25 +100,20 @@ textarea:focus {
   scrollbar-width: 5px;
   scrollbar-color: rgb(170, 170, 170) transparent;
 }
-
 *::-webkit-scrollbar {
   height: 10px;
   width: 7px;
 }
-
 *::-webkit-scrollbar-track {
   background: transparent;
 }
-
 *::-webkit-scrollbar-thumb {
   background-color: rgb(170, 170, 170);
   border-radius: 10px;
 }
-
 *::-webkit-scrollbar-thumb:hover {
   background-color: rgb(140, 140, 140);
 }
-
 *::-webkit-scrollbar-thumb:active {
   background-color: rgb(110, 110, 110);
 }
@@ -132,15 +123,19 @@ textarea:focus {
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff');
   font-weight: lighter;
 }
-
 @font-face {
   font-family: 'IBMPlexSansKR';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
   font-weight: normal;
 }
-
 @font-face {
   font-family: 'IBMPlexSansKR';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-SemiBold.woff') format('woff');
   font-weight: bold;
+}
+@font-face {
+  font-family: 'Dovemayo-Medium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/Dovemayo-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
