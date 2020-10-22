@@ -1,28 +1,38 @@
 <template>
-  <div class="sidebar" v-on:mouseover="showSidebarText" v-on:mouseleave="hideSidebarText">
+  <div class="sidebar" v-on:mouseover="showSidebarText" @mouseleave="hideSidebarText">
     <div class="sidebar__icons">
-      <div class="sidebar__icon-wrapper"><img class="sidebar__icon" src="../assets/sidebar/add.png" /></div>
-      <div class="sidebar__icon-wrapper"><img class="sidebar__icon" src="../assets/sidebar/random.png" /></div>
-      <div class="sidebar__icon-wrapper"><img class="sidebar__icon" src="../assets/sidebar/calendar.png" /></div>
-      <div class="sidebar__icon-wrapper"><img class="sidebar__icon" src="../assets/sidebar/book.png" /></div>
+      <div
+        v-for="(iconSrc, index) in iconSrcList"
+        :key="index"
+        :class="{ 'sidebar__icon-wrapper': true, 'sidebar__icon-selected': index === selectedIndex }"
+        @click="changeSelectMode(index)"
+      >
+        <img class="sidebar__icon" :src="iconSrc" />
+      </div>
     </div>
     <transition name="slide-right">
       <div class="sidebar__texts" v-show="sidebarTextShown">
-        <div class="sidebar__text-wrapper"><div class="sidebar__text">추가하기</div></div>
-        <div class="sidebar__text-wrapper"><div class="sidebar__text">어떤 글</div></div>
-        <div class="sidebar__text-wrapper"><div class="sidebar__text">달력</div></div>
-        <div class="sidebar__text-wrapper"><div class="sidebar__text">내 책갈피</div></div>
+        <div class="sidebar__text-wrapper" v-for="(modeName, index) in modeNames" :key="index">
+          <div class="sidebar__text" :key="index" @click="changeSelectMode(index)">{{ modeName }}</div>
+        </div>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
+import AddIcon from '@/assets/sidebar/add.png';
+import RandomIcon from '@/assets/sidebar/random.png';
+import CalendarIcon from '@/assets/sidebar/calendar.png';
+import BookIcon from '@/assets/sidebar/book.png';
 export default {
   name: 'Sidebar',
   data() {
     return {
       sidebarTextShown: false,
+      modeNames: ['추가하기', '어떤 글', '달력', '내 책갈피'],
+      iconSrcList: [AddIcon, RandomIcon, CalendarIcon, BookIcon],
+      selectedIndex: 0,
     };
   },
   methods: {
@@ -31,6 +41,9 @@ export default {
     },
     hideSidebarText() {
       this.sidebarTextShown = false;
+    },
+    changeSelectMode(index) {
+      this.selectedIndex = index;
     },
   },
 };
@@ -58,10 +71,14 @@ export default {
 .sidebar__icon {
   height: 1.2rem;
 }
+.sidebar__icon-selected {
+  background-color: #ccc6ad;
+}
 .sidebar__text-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-left: 0.5rem;
   height: 3.5rem;
   cursor: pointer;
 }
@@ -78,7 +95,7 @@ export default {
   transition: all 0.2s ease;
 }
 .slide-right-leave-active {
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 .slide-right-enter,
 .slide-right-leave-to {
