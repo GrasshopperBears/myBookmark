@@ -5,7 +5,10 @@
         <div
           v-for="(iconSrc, index) in iconSrcList"
           :key="index"
-          :class="{ 'sidebar__icon-wrapper': true, 'sidebar__icon-selected': index === selectedIndex }"
+          :class="{
+            'sidebar__icon-wrapper': true,
+            'sidebar__icon-selected': currentRoute === routers[index],
+          }"
           @click="changeSelectMode(index)"
         >
           <img class="sidebar__icon" :src="iconSrc" />
@@ -72,9 +75,23 @@ export default {
       sidebarTextShown: false,
       modeNames: ['추가하기', '어떤 글', '달력', '내 책갈피'],
       iconSrcList: [AddIcon, RandomIcon, CalendarIcon, BookIcon],
-      routers: ['/', '/random', 'calendar', '/my-bookmark'],
-      selectedIndex: 0,
+      routers: ['/', '/random', '/calendar', '/my-bookmark'],
+      selectedIndex: undefined,
+      currentRoute: this.$router.currentRoute.path,
     };
+  },
+  mounted() {
+    this.selectedIndex = this.routers.findIndex((route) => route === this.currentRoute);
+  },
+  computed: {
+    storeRoute() {
+      return this.$store.getters.currentPath;
+    },
+  },
+  watch: {
+    storeRoute(newPath, oldPath) {
+      this.currentRoute = newPath;
+    },
   },
   methods: {
     showSidebarText() {
@@ -86,18 +103,22 @@ export default {
     changeSelectMode(index) {
       if (index !== this.selectedIndex) {
         this.selectedIndex = index;
+        // this.currentRoute = this.routers[index];
         this.$router.push(this.routers[index]);
       }
     },
     goSignup() {
+      this.selectedIndex = -1;
       this.$router.push('/signup');
     },
     goSignin() {
+      this.selectedIndex = -1;
       this.$router.push('/signin');
     },
     logout() {
+      this.selectedIndex = -1;
       this.$store.commit('unauthorizeUser');
-      this.$store.commit('setUserToken', undefined);
+      window.localStorage.removeItem('token');
       this.$router.push('/signin');
     },
   },

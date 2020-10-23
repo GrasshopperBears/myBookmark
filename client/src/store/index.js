@@ -5,18 +5,23 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    userToken: undefined,
     authorized: false,
+    currentPath: undefined,
+  },
+  getters: {
+    currentPath(state) {
+      return state.currentPath;
+    },
   },
   mutations: {
-    authorizeUser() {
-      this.state.authorized = true;
+    authorizeUser(state) {
+      state.authorized = true;
     },
-    unauthorizeUser() {
-      this.state.authorized = false;
+    unauthorizeUser(state) {
+      state.authorized = false;
     },
-    setUserToken(token) {
-      this.state.userToken = token;
+    changeCurrentPath(state, newPath) {
+      state.currentPath = newPath;
     },
   },
 });

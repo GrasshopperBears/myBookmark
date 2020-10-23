@@ -29,7 +29,7 @@ export default {
         .post('/auth/signin', this.form)
         .then((res) => {
           this.$store.commit('authorizeUser');
-          this.$store.commit('setUserToken', res.data.token);
+          window.localStorage.setItem('token', res.data.token);
           this.$router.push('/');
         })
         .catch((err) => {
