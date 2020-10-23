@@ -3,9 +3,8 @@ const sequelize = require('../model');
 
 const Book = sequelize.define('Book', {
   id: {
-    type: Sequelize.INTEGER(8).UNSIGNED,
+    type: Sequelize.STRING(13),
     primaryKey: true,
-    autoIncrement: true,
     allowNull: false,
   },
   title: {

@@ -14,7 +14,7 @@ const Bookmark = sequelize.define('Bookmark', {
     allowNull: false,
   },
   book_id: {
-    type: Sequelize.INTEGER(8).UNSIGNED,
+    type: Sequelize.Sequelize.STRING(13),
     references: { model: 'Books', key: 'id' },
     allowNull: false,
   },
@@ -33,7 +33,10 @@ const Bookmark = sequelize.define('Bookmark', {
   created: {
     type: Sequelize.TIME,
     allowNull: false,
-    defaultValue: new Date(),
+  },
+  page: {
+    type: Sequelize.INTEGER(6).UNSIGNED,
+    allowNull: true,
   },
 });
 
