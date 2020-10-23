@@ -4,19 +4,21 @@ const dotenv = require('dotenv');
 const app = express();
 const sequelize = require('./models/model');
 const passport = require('passport');
+const cors = require('cors');
 const passportConfig = require('./config/index');
 const modelsConfig = require('./models');
 
 dotenv.config();
-app.set('view engine', 'ejs');
 app.use(morgan('dev'));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(passport.initialize());
+app.use(express.json({ limit: '15mb' }));
+app.use(passport.initialize({ limit: '15mb' }));
+app.use(cors());
 passportConfig();
 modelsConfig();
 
 app.use(require('./routes/auth'));
+app.use(require('./routes/ocr'));
 
 sequelize
   .sync()
