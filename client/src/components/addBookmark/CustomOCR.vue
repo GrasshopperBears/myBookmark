@@ -11,7 +11,7 @@
         <b-col sm="6"><b-form-input id="custom-ocr--author" v-model="author"></b-form-input></b-col>
       </b-row>
     </div>
-    <BookSearchResult :searchResult="searchedBookInfo"></BookSearchResult>
+    <BookSearchResult :searchResult="searchedBookInfo" v-on:select-book="selectBook"></BookSearchResult>
   </div>
 </template>
 
@@ -27,7 +27,14 @@ export default {
       title: '',
       author: '',
       searchedBookInfo: [],
+      selectedBook: undefined,
     };
+  },
+  watch: {
+    selectedBook() {
+      this.title = this.selectedBook.title;
+      this.author = this.selectedBook.authors.join(', ');
+    },
   },
   methods: {
     searchBook() {
@@ -36,6 +43,9 @@ export default {
         this.searchedBookInfo = res.data.result;
         this.$bvModal.show('book-search-result-modal');
       });
+    },
+    selectBook(e, key) {
+      this.selectedBook = this.searchedBookInfo.find((book) => book.isbn === key);
     },
   },
 };
