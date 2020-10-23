@@ -17,18 +17,21 @@
           class="sidebar__icon--logout sidebar__icon"
           src="@/assets/sidebar/logout.png"
           v-if="$store.state.authorized"
+          @click="logout"
         />
         <img
           id="sidebar__icon--signin"
           class="sidebar__icon--singin sidebar__icon"
           src="@/assets/sidebar/signin.png"
           v-if="!$store.state.authorized"
+          @click="goSignin"
         />
         <img
           id="sidebar__icon--signup"
           class="sidebar__icon--signup sidebar__icon"
           src="@/assets/sidebar/signup.png"
           v-if="!$store.state.authorized"
+          @click="goSignup"
         />
       </div>
     </div>
@@ -40,13 +43,13 @@
           </div>
         </div>
         <div class="sidebar__texts-bottom sidebar__text-wrapper">
-          <div class="sidebar__text-wrapper" v-if="$store.state.authorized">
+          <div class="sidebar__text-wrapper" v-if="$store.state.authorized" @click="logout">
             <div class="sidebar__text">로그아웃</div>
           </div>
-          <div class="sidebar__text-wrapper" v-if="!$store.state.authorized">
+          <div class="sidebar__text-wrapper" v-if="!$store.state.authorized" @click="goSignin">
             <div class="sidebar__text">로그인</div>
           </div>
-          <div class="sidebar__text-wrapper" v-if="!$store.state.authorized">
+          <div class="sidebar__text-wrapper" v-if="!$store.state.authorized" @click="goSignup">
             <div class="sidebar__text">회원가입</div>
           </div>
         </div>
@@ -60,6 +63,7 @@ import AddIcon from '@/assets/sidebar/add.png';
 import RandomIcon from '@/assets/sidebar/random.png';
 import CalendarIcon from '@/assets/sidebar/calendar.png';
 import BookIcon from '@/assets/sidebar/book.png';
+import axios from 'axios';
 
 export default {
   name: 'Sidebar',
@@ -84,6 +88,17 @@ export default {
         this.selectedIndex = index;
         this.$router.push(this.routers[index]);
       }
+    },
+    goSignup() {
+      this.$router.push('/signup');
+    },
+    goSignin() {
+      this.$router.push('/signin');
+    },
+    logout() {
+      this.$store.commit('unauthorizeUser');
+      this.$store.commit('setUserToken', undefined);
+      this.$router.push('/signin');
     },
   },
 };
@@ -168,6 +183,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     padding: 0.65rem 0;
   }
 }
