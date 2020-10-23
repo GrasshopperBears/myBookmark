@@ -19,6 +19,7 @@ modelsConfig();
 
 app.use(require('./routes/auth'));
 app.use(require('./routes/ocr'));
+app.use(require('./routes/searchBook'));
 
 sequelize
   .sync()
