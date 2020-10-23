@@ -7,10 +7,14 @@ export const store = new Vuex.Store({
   state: {
     authorized: false,
     currentPath: undefined,
+    ocrResult: '',
   },
   getters: {
     currentPath(state) {
       return state.currentPath;
+    },
+    ocrResult(state) {
+      return state.ocrResult;
     },
   },
   mutations: {
@@ -22,6 +26,9 @@ export const store = new Vuex.Store({
     },
     changeCurrentPath(state, newPath) {
       state.currentPath = newPath;
+    },
+    setOcrResult(state, newText) {
+      state.ocrResult = newText;
     },
   },
 });

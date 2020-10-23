@@ -11,10 +11,8 @@
         <img class="add-bookmark__picture-preview--img" v-if="imgUrl" :src="imgUrl" />
       </div>
     </div>
-    <b-button variant="primary" @click="analyzeImage">분석하기</b-button>
-    <!-- <b-modal id="add-bookmark__error-modal" title="이런!" ok-only>
-      <p>사진 분석 중 오류가 발생했어요. 다시 시도해주세요.</p>
-    </b-modal> -->
+    <b-button variant="primary" @click="analyzeImage" v-if="!isLoading">분석하기</b-button>
+    <b-spinner variant="primary" v-if="isLoading"></b-spinner>
   </div>
 </template>
 
@@ -27,6 +25,7 @@ export default {
     return {
       image: undefined,
       imgUrl: undefined,
+      isLoading: false,
     };
   },
   methods: {
@@ -41,6 +40,8 @@ export default {
       }
     },
     analyzeImage() {
+      if (!this.image) return alert('사진을 추가해주세요');
+      this.isLoading = true;
       const reader = new FileReader();
       reader.onload = () => {
         const image = {
@@ -56,11 +57,13 @@ export default {
         axios
           .post('http://localhost:3000/api/ocr', image)
           .then((res) => {
-            console.log(res);
+            this.isLoading = false;
+            this.$store.commit('setOcrResult', res.data.resultSentence);
           })
           .catch((err) => {
             if (err.response.status === 500) this.$bvModal.msgBoxOk(err.response.data.message);
             else this.$bvModal.msgBoxOk('알 수 없는 오류가 발생했어요');
+            this.isLoading = false;
           });
       };
       reader.readAsDataURL(this.image);
