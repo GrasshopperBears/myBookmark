@@ -11,25 +11,30 @@
         <b-col sm="6"><b-form-input id="custom-ocr--author" v-model="author"></b-form-input></b-col>
       </b-row>
     </div>
+    <BookSearchResult :searchResult="searchedBookInfo"></BookSearchResult>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import BookSearchResult from './BookSearchResult';
 
 export default {
   name: 'CustomOCR',
+  components: { BookSearchResult },
   data() {
     return {
       title: '',
       author: '',
+      searchedBookInfo: [],
     };
   },
   methods: {
     searchBook() {
       if (!this.title) return;
       axios.get('/api/search/book', { params: { title: this.title } }).then((res) => {
-        console.log(res);
+        this.searchedBookInfo = res.data.result;
+        this.$bvModal.show('book-search-result-modal');
       });
     },
   },

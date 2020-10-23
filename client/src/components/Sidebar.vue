@@ -140,7 +140,7 @@ export default {
   width: 3.2rem;
   height: 100vh;
   background-color: #f5edce;
-  z-index: 2;
+  z-index: 3;
   > div {
     display: flex;
     flex-direction: column;
@@ -171,7 +171,7 @@ export default {
   justify-content: space-between;
   width: 7rem;
   background-color: #f5edce;
-  z-index: 1;
+  z-index: 2;
 }
 .sidebar__text:hover {
   text-decoration: underline;
