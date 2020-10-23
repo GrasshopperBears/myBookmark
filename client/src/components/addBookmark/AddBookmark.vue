@@ -1,16 +1,17 @@
 <template>
   <div class="add-bookmark-wrapper">
     <AddPicture></AddPicture>
-    <div class="add-bookmark__ocr-result-wrapper"></div>
+    <CustomOCR></CustomOCR>
   </div>
 </template>
 
 <script>
 import AddPicture from './AddPicture';
+import CustomOCR from './CustomOCR';
 
 export default {
   name: 'AddBookmark',
-  components: { AddPicture },
+  components: { AddPicture, CustomOCR },
 };
 </script>
 
