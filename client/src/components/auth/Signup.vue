@@ -1,14 +1,15 @@
 <template>
-  <div class="signin-wrapper">
-    <div class="signin--title">로그인</div>
-    <b-form @submit="signin" class="sigin__form">
+  <div class="signup-wrapper">
+    <div class="signup--title">회원가입</div>
+    <b-form @submit="signup" class="signup__form">
       <b-form-input class="m-2" placeholder="아이디" required v-model="form.id"></b-form-input>
       <b-form-input class="m-2" placeholder="비밀번호" type="password" required v-model="form.password"></b-form-input>
-      <b-button class="m-5" type="submit" variant="primary">로그인</b-button>
+      <b-form-input class="m-2" placeholder="이름" required v-model="form.userName"></b-form-input>
+      <b-button class="m-5" type="submit btn-dark" variant="primary">회원가입</b-button>
     </b-form>
-    <div class="signin-to-signup">
-      <p class="m-0">계정이 없다면?</p>
-      <b-button class="ml-3 signup" variant="secondary" @click="goToSignup">회원가입하러 가기</b-button>
+    <div class="signup-to-signin">
+      <p class="m-0">이미 계정이 있다면?</p>
+      <b-button class="ml-3 signup" variant="secondary" @click="goToSignin">로그인하러 가기</b-button>
     </div>
   </div>
 </template>
@@ -17,24 +18,24 @@
 import axios from 'axios';
 
 export default {
-  name: 'Signin',
+  name: 'Signup',
   data() {
     return {
       form: {
         id: '',
         password: '',
+        userName: '',
       },
     };
   },
   methods: {
-    signin(e) {
+    signup(e) {
       e.preventDefault();
       axios
-        .post('/auth/signin', this.form)
+        .post('/auth/signup', this.form)
         .then((res) => {
-          this.$store.commit('authorizeUser');
-          window.localStorage.setItem('token', res.data.token);
-          this.$router.push('/');
+          alert('책장이 만들어졌습니다!');
+          this.$router.push('/signin');
         })
         .catch((err) => {
           if (err.response.status === 500 || err.response.status === 404)
@@ -42,31 +43,31 @@ export default {
           else this.$bvModal.msgBoxOk('알 수 없는 오류가 발생했어요');
         });
     },
-    goToSignup() {
-      this.$router.push('/signup');
+    goToSignin() {
+      this.$router.push('/signin');
     },
   },
 };
 </script>
 
-<style lang="scss">
-.signin-wrapper {
+<style>
+.signup-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 20rem;
+  height: 25rem;
 }
-.signin--title {
+.signup--title {
   font-size: 2rem;
 }
-.sigin__form {
+.signup__form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.signin-to-signup {
+.signup-to-signin {
   display: flex;
   flex-direction: row;
   align-items: center;
