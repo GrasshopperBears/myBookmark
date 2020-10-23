@@ -12,6 +12,9 @@
       </div>
     </div>
     <b-button variant="primary" @click="analyzeImage">분석하기</b-button>
+    <!-- <b-modal id="add-bookmark__error-modal" title="이런!" ok-only>
+      <p>사진 분석 중 오류가 발생했어요. 다시 시도해주세요.</p>
+    </b-modal> -->
   </div>
 </template>
 
@@ -50,9 +53,15 @@ export default {
           ],
           lang: 'ko',
         };
-        axios.post('http://localhost:3000/api/ocr', image).then((res) => {
-          console.log(res);
-        });
+        axios
+          .post('http://localhost:3000/api/ocr', image)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            if (err.response.status === 500) this.$bvModal.msgBoxOk(err.response.data.message);
+            else this.$bvModal.msgBoxOk('알 수 없는 오류가 발생했어요');
+          });
       };
       reader.readAsDataURL(this.image);
     },
