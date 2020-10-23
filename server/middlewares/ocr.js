@@ -1,12 +1,10 @@
-const express = require('express');
-const router = express.Router();
 const path = require('path');
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
 const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
-router.post('/api/ocr', async (req, res, next) => {
+const ocr = async (req, res, next) => {
   const config = {
     headers: {
       'X-OCR-SECRET': process.env.NAVER_OCR_SECRET,
@@ -29,12 +27,15 @@ router.post('/api/ocr', async (req, res, next) => {
           return acc;
         }, [])
         .join(' ');
-      res.header('Access-Control-Allow-Origin', '*');
-      res.status(200).json({ ok: true, resultSentence });
+      req.body.resultSentence = resultSentence;
+      req.body.ok = true;
+      next();
     })
     .catch((err) => {
-      res.status(500).json({ ok: false, message: err.response.data || '오류가 발생했습니다.' });
+      req.body.ok = false;
+      req.body.message = err.response.data || '오류가 발생했습니다.';
+      next();
     });
-});
+};
 
-module.exports = router;
+module.exports = ocr;

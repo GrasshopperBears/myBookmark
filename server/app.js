@@ -18,8 +18,7 @@ passportConfig();
 modelsConfig();
 
 app.use(require('./routes/auth'));
-app.use(require('./routes/ocr'));
-app.use(require('./routes/searchBook'));
+app.use(require('./routes/api'));
 
 sequelize
   .sync()
