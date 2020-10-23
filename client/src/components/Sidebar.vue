@@ -58,6 +58,7 @@ export default {
   position: fixed;
   display: flex;
   flex-direction: row;
+  font-family: 'Dovemayo-Medium';
 }
 .sidebar__icons {
   display: flex;

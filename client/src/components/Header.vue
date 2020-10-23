@@ -31,6 +31,7 @@ export default {
   align-items: center;
   padding: 2rem;
   height: 5rem;
+  font-family: 'Dovemayo-Medium';
 }
 .logo {
   display: flex;
