@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { store } from '../store';
 import AddBookmark from '../components/addBookmark/AddBookmark';
 import RandomBookmark from '../components/randomBookmark/RandomBookmark';
 import BookmarkCalendar from '../components/bookmarkCalendar/BookmarkCalendar';
@@ -9,7 +10,7 @@ import Signin from '../components/auth/Signin';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -22,3 +23,23 @@ export default new Router({
     { path: '/signin', component: Signin },
   ],
 });
+
+const routerConfig = () => {
+  router.beforeEach((to, from, next) => {
+    if (to.path === from.path) return next(false);
+    if (to.path === '/signin' || to.path === '/signup') {
+      store.commit('changeCurrentPath', to.path);
+      return next();
+    }
+    if (!store.state.authorized) {
+      alert('로그인 후 이용해주세요!');
+      store.commit('changeCurrentPath', '/signin');
+      next('/signin');
+    } else {
+      store.commit('changeCurrentPath', to.path);
+      next();
+    }
+  });
+};
+
+export { router, routerConfig };

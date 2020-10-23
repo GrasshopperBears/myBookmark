@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App';
-import router from './router';
+import { router, routerConfig } from './router';
 import axios from 'axios';
 import { store } from './store';
 import BootstrapVue from 'bootstrap-vue';
@@ -12,7 +12,7 @@ Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
 axios.defaults.baseURL = 'http://localhost:3000';
-axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.userToken || ''}`;
+axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem('token') || ''}`;
 
 new Vue({
   store,
@@ -23,6 +23,7 @@ new Vue({
     axios
       .get('/auth/is-auth')
       .then((res) => {
+        routerConfig();
         if (res.data.authorized) store.state.authorized = true;
         else store.state.authorized = false;
       })
