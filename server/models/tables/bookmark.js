@@ -14,7 +14,7 @@ const Bookmark = sequelize.define('Bookmark', {
     allowNull: false,
   },
   book_id: {
-    type: Sequelize.Sequelize.STRING(13),
+    type: Sequelize.STRING(13),
     references: { model: 'Books', key: 'id' },
     allowNull: false,
   },

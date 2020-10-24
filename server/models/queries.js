@@ -1,5 +1,6 @@
 const Book = require('./tables/book');
 const User = require('./tables/user');
+const Bookmark = require('./tables/bookmark');
 
 exports.findExistingUser = async (user_id, provider) => {
   try {
@@ -28,18 +29,27 @@ exports.insertUser = async (user_id, user_name, password, provider) => {
   }
 };
 
-exports.insertBook = async (title, authors, published_date, thumbnail_url) => {
+exports.findBook = async (id) => {
   try {
-    const result = await Book.create({ title, authors, published_date, thumbnail_url });
+    const result = await Book.findOne({ where: { id } });
     return result;
   } catch (e) {
     return e;
   }
 };
 
-exports.insertBookmark = async (id, uid, book_id, text, highlights, omits, created) => {
+exports.insertBook = async (id, title, authors, published_date, thumbnail_url) => {
   try {
-    const result = await Book.create({ id, uid, book_id, text, highlights, omits, created });
+    const result = await Book.create({ id, title, authors, published_date, thumbnail_url });
+    return result;
+  } catch (e) {
+    return e;
+  }
+};
+
+exports.insertBookmark = async (uid, book_id, text, highlights, omits, created, page) => {
+  try {
+    const result = await Bookmark.create({ uid, book_id, text, highlights, omits, created, page });
     return result;
   } catch (e) {
     return e;
