@@ -28,20 +28,14 @@ export default {
       text: '',
     };
   },
-  computed: {
-    index() {
-      return this.$route.query.index;
-    },
-  },
-  watch: {
-    index(newIndex, _) {
-      const newBookmark = this.$store.state.bookmark[newIndex];
-      const newBook = newBookmark.Book;
-      this.coverUrl = newBook.thumbnail_url || RandomBookIcon;
-      this.title = newBook.title;
-      this.authors = newBook.authors;
-      this.text = newBookmark.text;
-    },
+  mounted() {
+    const index = this.$route.query.index;
+    const newBookmark = this.$store.state.bookmark[index];
+    const newBook = newBookmark.Book;
+    this.coverUrl = newBook.thumbnail_url || RandomBookIcon;
+    this.title = newBook.title;
+    this.authors = newBook.authors;
+    this.text = newBookmark.text;
   },
 };
 </script>
