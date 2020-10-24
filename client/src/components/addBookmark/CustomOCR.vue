@@ -110,6 +110,7 @@ export default {
         .post('/api/bookmark', data)
         .then((res) => {
           alert('책갈피가 추가되었습니다.');
+          this.$store.commit('addBookmark', res.data.result);
           this.clearFields();
         })
         .catch((err) => {

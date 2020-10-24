@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     authorized: false,
     currentPath: undefined,
     ocrResult: '',
+    bookmark: [],
   },
   getters: {
     currentPath(state) {
@@ -29,6 +30,9 @@ export const store = new Vuex.Store({
     },
     setOcrResult(state, newText) {
       state.ocrResult = newText;
+    },
+    addBookmark(state, newBookmark) {
+      state.bookmark.push(newBookmark);
     },
   },
 });
