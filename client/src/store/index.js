@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
     currentPath: undefined,
     ocrResult: '',
     bookmark: [],
+    pending: true,
   },
   getters: {
     currentPath(state) {

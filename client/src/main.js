@@ -20,22 +20,24 @@ new Vue({
   components: { App },
   template: '<App/>',
   created() {
-    axios
-      .get('/auth/is-auth')
-      .then((res) => {
-        routerConfig();
-        if (res.data.authorized) store.state.authorized = true;
-        else store.state.authorized = false;
-      })
-      .catch((e) => alert('오류가 발생했습니다'));
-  },
-  beforeMount() {
-    axios
-      .get('/api/bookmark')
-      .then((res) => {
-        store.state.bookmark = res.data.bookmark;
-      })
-      .catch((e) => alert('오류가 발생했습니다.'));
+    Promise.all([
+      axios
+        .get('/auth/is-auth')
+        .then((res) => {
+          routerConfig();
+          if (res.data.authorized) store.state.authorized = true;
+          else store.state.authorized = false;
+        })
+        .catch((e) => alert('오류가 발생했습니다')),
+      axios
+        .get('/api/bookmark')
+        .then((res) => {
+          store.state.bookmark = res.data.bookmark;
+        })
+        .catch((e) => alert('오류가 발생했습니다.')),
+    ]).then((res) => {
+      store.state.pending = false;
+    });
   },
   render: (h) => h(App),
 }).$mount('#app');
