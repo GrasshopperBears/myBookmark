@@ -16,7 +16,7 @@ const passportLocalConfig = () => {
           if (!result) return done(null, false, { message: '잘못된 사용자 정보입니다.' });
           const compareResult = bcrypt.compareSync(password, result.dataValues.password);
           if (!compareResult) return done(null, false, { message: '잘못된 사용자 정보입니다.' });
-          return done(null, id);
+          return done(null, result.dataValues.id);
         } catch (e) {
           return done(e);
         }

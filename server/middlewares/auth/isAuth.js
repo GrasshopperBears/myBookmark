@@ -13,7 +13,10 @@ const isAuth = async (req, res, next) => {
       const decoded = jwt.verify(userToken, process.env.JWT_SECRET);
       const result = findExistingUser(decoded.id, decoded.provider);
       if (!result) req.body.authorized = false;
-      else req.body.authorized = true;
+      else {
+        req.body.authorized = true;
+        req.body.uid = decoded.id;
+      }
     }
     req.body.ok = true;
     next();
