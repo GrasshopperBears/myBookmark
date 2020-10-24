@@ -1,7 +1,7 @@
 <template>
   <div class="add-bookmark-wrapper">
-    <AddPicture></AddPicture>
-    <CustomOCR></CustomOCR>
+    <AddPicture ref="clearPicture"></AddPicture>
+    <CustomOCR @clearPicture="clearPicture"></CustomOCR>
   </div>
 </template>
 
@@ -12,6 +12,11 @@ import CustomOCR from './CustomOCR';
 export default {
   name: 'AddBookmark',
   components: { AddPicture, CustomOCR },
+  methods: {
+    clearPicture() {
+      this.$refs.clearPicture.clearImage();
+    },
+  },
 };
 </script>
 

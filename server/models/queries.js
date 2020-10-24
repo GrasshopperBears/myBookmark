@@ -71,7 +71,6 @@ exports.findBookmark = async (uid) => {
       include: [{ model: Book, attributes: ['title', 'authors', 'thumbnail_url'] }],
       where: { uid },
       order: [['created', 'DESC']],
-      group: 'created',
     });
     return result;
   } catch (e) {

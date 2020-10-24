@@ -63,6 +63,19 @@ export default {
     },
   },
   methods: {
+    clearFields() {
+      this.selectedBook = undefined;
+      this.form = {
+        isbn: '',
+        title: '',
+        author: '',
+        highlights: '',
+        omits: '',
+        page: '',
+      };
+      this.$store.state.ocrResult = '';
+      this.$emit('clearPicture');
+    },
     searchBook() {
       if (!this.form.title) return;
       axios.get('/api/search/book', { params: { title: this.form.title } }).then((res) => {
@@ -96,7 +109,8 @@ export default {
       axios
         .post('/api/bookmark', data)
         .then((res) => {
-          console.log(res.data);
+          alert('책갈피가 추가되었습니다.');
+          this.clearFields();
         })
         .catch((err) => {
           console.log(err);

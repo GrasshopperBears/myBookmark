@@ -5,6 +5,7 @@
         accept="image/jpeg, image/jpg, image/png"
         placeholder="페이지 올리기"
         drop-placeholder="여기에 드롭하세요"
+        ref="picture-input"
         @change="selectImage"
       ></b-form-file>
       <div class="add-bookmark__picture-preview">
@@ -29,14 +30,19 @@ export default {
     };
   },
   methods: {
+    clearImage() {
+      this.image = undefined;
+      this.imgUrl = undefined;
+      this.$refs['picture-input'].reset();
+    },
     selectImage(e) {
       const image = e.target.files[0];
       if (image.size > 1024 * 1024 * 10) {
         e.preventDefault();
         alert('파일 사이즈는 10Mb를 넘길 수 없습니다.');
       } else {
-        this.image = e.target.files[0];
-        this.imgUrl = URL.createObjectURL(this.image);
+        this.image = image;
+        this.imgUrl = URL.createObjectURL(image);
       }
     },
     analyzeImage() {
