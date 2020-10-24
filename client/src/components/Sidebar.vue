@@ -101,10 +101,9 @@ export default {
       this.sidebarTextShown = false;
     },
     changeSelectMode(index) {
-      if (index !== this.selectedIndex) {
+      if (index !== this.selectedIndex || index === 1) {
         this.selectedIndex = index;
-        // this.currentRoute = this.routers[index];
-        this.$router.push(this.routers[index]);
+        this.$router.push(this.routers[index]).catch(() => {});
       }
     },
     goSignup() {

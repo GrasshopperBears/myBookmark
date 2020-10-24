@@ -26,10 +26,12 @@ const router = new Router({
 
 const routerConfig = () => {
   router.beforeEach((to, from, next) => {
-    if (to.path === from.path) return next(false);
+    if (to.path === '/random' && !Object.keys(to.query).length)
+      next({ path: to.path, query: { index: Math.floor(Math.random() * store.state.bookmark.length) } });
+    if (to.path === from.path) next(false);
     if (to.path === '/signin' || to.path === '/signup') {
       store.commit('changeCurrentPath', to.path);
-      return next();
+      next();
     }
     if (!store.state.authorized) {
       alert('로그인 후 이용해주세요!');

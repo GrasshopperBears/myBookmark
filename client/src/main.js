@@ -33,7 +33,6 @@ new Vue({
     axios
       .get('/api/bookmark')
       .then((res) => {
-        console.log(res.data.bookmark);
         store.state.bookmark = res.data.bookmark;
       })
       .catch((e) => alert('오류가 발생했습니다.'));
