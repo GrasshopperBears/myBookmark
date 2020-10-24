@@ -17,7 +17,12 @@
         <b-col cols="3"><b-form-input id="custom-ocr--page" v-model="form.page"></b-form-input></b-col>
       </b-row>
     </div>
-    <b-form-textarea id="custom-ocr__ocr-result" class="mt-5" v-model="ocrResult" rows="20"></b-form-textarea>
+    <b-form-textarea
+      id="custom-ocr__ocr-result"
+      class="mt-5"
+      v-model="$store.state.ocrResult"
+      rows="20"
+    ></b-form-textarea>
     <div class="custom-ocr__confirm-area d-flex justify-content-end">
       <div @click="submitBookmark" class="custom-ocr__confirm-wrapper d-flex align-items-center justify-content-center">
         <img src="@/assets/bookmark-confirm.png" class="custom-ocr__confirm--img" />
@@ -48,11 +53,6 @@ export default {
         page: '',
       },
     };
-  },
-  computed: {
-    ocrResult() {
-      return this.$store.getters.ocrResult;
-    },
   },
   watch: {
     selectedBook(newBook, prevBook) {

@@ -31,7 +31,7 @@ const Bookmark = sequelize.define('Bookmark', {
     allowNull: true,
   },
   created: {
-    type: Sequelize.TIME,
+    type: Sequelize.DATE,
     allowNull: false,
   },
   page: {
