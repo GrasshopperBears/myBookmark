@@ -5,7 +5,7 @@ const addBookmark = async (req, res, next) => {
   try {
     const result = await insertBookmark(
       req.body.uid,
-      req.body.isbn,
+      req.body.bookId,
       req.body.text,
       req.body.highlights,
       req.body.omits,
