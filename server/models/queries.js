@@ -20,6 +20,15 @@ exports.findUserInfo = async (user_id, provider) => {
   }
 };
 
+exports.findUserByUid = async (id, provider) => {
+  try {
+    const result = await User.findOne({ where: { id, provider } });
+    return result;
+  } catch (e) {
+    return e;
+  }
+};
+
 exports.insertUser = async (user_id, user_name, password, provider) => {
   try {
     const result = await User.create({ user_id, user_name, password, provider });

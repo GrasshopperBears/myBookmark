@@ -3,7 +3,7 @@ const sequelize = require('../model');
 
 const Book = sequelize.define('Book', {
   id: {
-    type: Sequelize.STRING(13),
+    type: Sequelize.STRING(40),
     primaryKey: true,
     allowNull: false,
   },
