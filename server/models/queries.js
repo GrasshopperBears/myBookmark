@@ -64,3 +64,17 @@ exports.insertBookmark = async (uid, book_id, text, highlights, omits, created, 
     return e;
   }
 };
+
+exports.findBookmark = async (uid) => {
+  try {
+    const result = await Bookmark.findAll({
+      include: [{ model: Book, attributes: ['title', 'authors', 'thumbnail_url'] }],
+      where: { uid },
+      order: [['created', 'DESC']],
+      group: 'created',
+    });
+    return result;
+  } catch (e) {
+    return e;
+  }
+};
