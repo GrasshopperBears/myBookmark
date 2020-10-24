@@ -3,12 +3,16 @@
     <div class="custom-ocr__search-wrapper">
       <b-row class="custom-ocr__search--each-line" align-v="center">
         <b-col sm="2" align-self="end"><label for="custom-ocr--title">책 제목</label></b-col>
-        <b-col sm="6"><b-form-input id="custom-ocr--title" v-model="form.title"></b-form-input></b-col>
+        <b-col sm="6"
+          ><b-form-input id="custom-ocr--title" v-model="form.title" @keydown="changeBookState"></b-form-input
+        ></b-col>
         <b-col sm="4"><b-button class="ml-5" @click="searchBook">검색하기</b-button></b-col>
       </b-row>
       <b-row class="custom-ocr__search--each-line mt-4" align-v="center">
         <b-col cols="2"><label for="custom-ocr--author">지은이</label></b-col>
-        <b-col cols="5"><b-form-input id="custom-ocr--author" v-model="form.author"></b-form-input></b-col>
+        <b-col cols="5"
+          ><b-form-input id="custom-ocr--author" v-model="form.author" @keydown="changeBookState"></b-form-input
+        ></b-col>
         <b-col cols="2"><label for="custom-ocr--page">페이지</label></b-col>
         <b-col cols="3"><b-form-input id="custom-ocr--page" v-model="form.page"></b-form-input></b-col>
       </b-row>
@@ -34,7 +38,7 @@ export default {
   data() {
     return {
       searchedBookInfo: [],
-      selectedBook: {},
+      selectedBook: undefined,
       form: {
         isbn: '',
         title: '',
@@ -51,9 +55,11 @@ export default {
     },
   },
   watch: {
-    selectedBook() {
-      this.form.title = this.selectedBook.title;
-      this.form.author = this.selectedBook.authors.join(', ');
+    selectedBook(newBook, prevBook) {
+      if (newBook) {
+        this.form.title = this.selectedBook.title;
+        this.form.author = this.selectedBook.authors.join(', ');
+      }
     },
   },
   methods: {
@@ -67,9 +73,19 @@ export default {
     selectBook(e, key) {
       this.selectedBook = this.searchedBookInfo.find((book) => book.isbn === key);
     },
+    changeBookState(e) {
+      if (this.selectedBook) {
+        if (!confirm('선택된 책 정보를 변경하시겠어요?')) {
+          e.preventDefault();
+        } else {
+          this.selectedBook = undefined;
+        }
+      }
+    },
     submitBookmark() {
+      if (!this.form.title) return alert('책 제목 입력은 필수입니다!');
       const data = {
-        book: this.selectedBook,
+        book: this.selectedBook || {},
         title: this.form.title,
         authors: this.form.author,
         text: this.$store.getters.ocrResult,
