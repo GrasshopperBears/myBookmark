@@ -11,11 +11,11 @@ const isAuth = async (req, res, next) => {
       req.body.authorized = false;
     } else {
       const decoded = jwt.verify(userToken, process.env.JWT_SECRET);
-      const result = findExistingUser(decoded.id, decoded.provider);
+      const result = await findExistingUser(decoded.id, decoded.provider);
       if (!result) req.body.authorized = false;
       else {
         req.body.authorized = true;
-        req.body.uid = decoded.id;
+        req.body.uid = result.dataValues.id;
       }
     }
     req.body.ok = true;

@@ -38,6 +38,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 .logo__main,
 .logo__main--container {

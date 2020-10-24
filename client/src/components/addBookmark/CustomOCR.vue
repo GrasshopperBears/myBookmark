@@ -3,19 +3,19 @@
     <div class="custom-ocr__search-wrapper">
       <b-row class="custom-ocr__search--each-line" align-v="center">
         <b-col sm="2" align-self="end"><label for="custom-ocr--title">책 제목</label></b-col>
-        <b-col sm="6"><b-form-input id="custom-ocr--title" v-model="title"></b-form-input></b-col>
+        <b-col sm="6"><b-form-input id="custom-ocr--title" v-model="form.title"></b-form-input></b-col>
         <b-col sm="4"><b-button class="ml-5" @click="searchBook">검색하기</b-button></b-col>
       </b-row>
       <b-row class="custom-ocr__search--each-line mt-4" align-v="center">
         <b-col cols="2"><label for="custom-ocr--author">지은이</label></b-col>
-        <b-col cols="5"><b-form-input id="custom-ocr--author" v-model="author"></b-form-input></b-col>
+        <b-col cols="5"><b-form-input id="custom-ocr--author" v-model="form.author"></b-form-input></b-col>
         <b-col cols="2"><label for="custom-ocr--page">페이지</label></b-col>
-        <b-col cols="3"><b-form-input id="custom-ocr--page" v-model="page"></b-form-input></b-col>
+        <b-col cols="3"><b-form-input id="custom-ocr--page" v-model="form.page"></b-form-input></b-col>
       </b-row>
     </div>
     <b-form-textarea id="custom-ocr__ocr-result" class="mt-5" v-model="ocrResult" rows="20"></b-form-textarea>
     <div class="custom-ocr__confirm-area d-flex justify-content-end">
-      <div class="custom-ocr__confirm-wrapper d-flex align-items-center justify-content-center">
+      <div @click="submitBookmark" class="custom-ocr__confirm-wrapper d-flex align-items-center justify-content-center">
         <img src="@/assets/bookmark-confirm.png" class="custom-ocr__confirm--img" />
         <div class="custom-ocr__confirm--text">책갈피 꽂기</div>
       </div>
@@ -33,11 +33,16 @@ export default {
   components: { BookSearchResult },
   data() {
     return {
-      title: '',
-      author: '',
       searchedBookInfo: [],
-      selectedBook: undefined,
-      page: '',
+      selectedBook: {},
+      form: {
+        isbn: '',
+        title: '',
+        author: '',
+        highlights: '',
+        omits: '',
+        page: '',
+      },
     };
   },
   computed: {
@@ -47,20 +52,39 @@ export default {
   },
   watch: {
     selectedBook() {
-      this.title = this.selectedBook.title;
-      this.author = this.selectedBook.authors.join(', ');
+      this.form.title = this.selectedBook.title;
+      this.form.author = this.selectedBook.authors.join(', ');
     },
   },
   methods: {
     searchBook() {
-      if (!this.title) return;
-      axios.get('/api/search/book', { params: { title: this.title } }).then((res) => {
+      if (!this.form.title) return;
+      axios.get('/api/search/book', { params: { title: this.form.title } }).then((res) => {
         this.searchedBookInfo = res.data.result;
         this.$bvModal.show('book-search-result-modal');
       });
     },
     selectBook(e, key) {
       this.selectedBook = this.searchedBookInfo.find((book) => book.isbn === key);
+    },
+    submitBookmark() {
+      const data = {
+        book: this.selectedBook,
+        title: this.form.title,
+        authors: this.form.author,
+        text: this.$store.getters.ocrResult,
+        highlights: undefined,
+        omits: undefined,
+        page: parseInt(this.form.page),
+      };
+      axios
+        .post('/api/bookmark', data)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
