@@ -1,9 +1,9 @@
-const { insertBookmark } = require('../models/queries');
+const { insertBookmark, findInsertedBookmark } = require('../models/queries');
 
 const addBookmark = async (req, res, next) => {
   if (!req.body.ok) return next();
   try {
-    const result = await insertBookmark(
+    const insertResult = await insertBookmark(
       req.body.uid,
       req.body.bookId,
       req.body.text,
@@ -12,6 +12,7 @@ const addBookmark = async (req, res, next) => {
       new Date(),
       req.body.page
     );
+    const result = await findInsertedBookmark(insertResult.dataValues.id);
     req.body.ok = true;
     req.body.result = result;
     next();

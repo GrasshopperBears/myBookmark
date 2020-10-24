@@ -65,6 +65,18 @@ exports.insertBookmark = async (uid, book_id, text, highlights, omits, created, 
   }
 };
 
+exports.findInsertedBookmark = async (id) => {
+  try {
+    const result = await Bookmark.findOne({
+      include: [{ model: Book, attributes: ['title', 'authors', 'thumbnail_url'] }],
+      where: { id },
+    });
+    return result;
+  } catch (e) {
+    return e;
+  }
+};
+
 exports.findBookmark = async (uid) => {
   try {
     const result = await Bookmark.findAll({
