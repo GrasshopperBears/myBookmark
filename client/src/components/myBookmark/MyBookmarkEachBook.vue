@@ -19,6 +19,7 @@
         class="my-bookmark-each-book__bookmark-each ml-5 mb-4 w-100 p-5"
       >
         <div>{{ bookmark.text }}</div>
+        <div v-if="bookmark.page" class="my-bookmark-each-book__bookmark--page text-right w-100">{{ page }}쪽</div>
       </div>
     </div>
   </div>
@@ -65,5 +66,9 @@ export default {
   border-radius: 5px;
   font-family: 'Dovemayo-Medium';
   font-size: 1.2rem;
+  .my-bookmark-each-book__bookmark--page {
+    color: gray;
+    font-size: 1rem;
+  }
 }
 </style>

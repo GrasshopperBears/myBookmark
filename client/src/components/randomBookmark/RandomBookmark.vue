@@ -9,8 +9,9 @@
         <div class="random__book-info--authors">{{ authors }}</div>
       </div>
     </div>
-    <div class="random__bookmark-wrapper ml-5 w-100 p-5">
+    <div class="random__bookmark-wrapper ml-5 w-100 p-5 d-flex flex-column justify-content-between">
       <div class="random__bookmark--text">{{ text }}</div>
+      <div v-if="page" class="random__bookmark--page text-right w-100">{{ page }}쪽</div>
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@ export default {
       title: '',
       authors: '',
       text: '',
+      page: 0,
     };
   },
   computed: {
@@ -58,6 +60,7 @@ export default {
       this.title = newBook.title;
       this.authors = newBook.authors;
       this.text = newBookmark.text;
+      this.page = newBookmark.page;
     },
   },
 };
@@ -82,5 +85,9 @@ export default {
   border-radius: 5px;
   font-family: 'Dovemayo-Medium';
   font-size: 1.2rem;
+  .random__bookmark--page {
+    color: gray;
+    font-size: 1rem;
+  }
 }
 </style>
