@@ -35,5 +35,9 @@ export const store = new Vuex.Store({
     addBookmark(state, newBookmark) {
       state.bookmark.unshift(newBookmark);
     },
+    deleteBookmarkById(state, bookmarkId) {
+      const idx = state.bookmark.findIndex((bookmark) => bookmark.id === bookmarkId);
+      state.bookmark.splice(idx, 1);
+    },
   },
 });

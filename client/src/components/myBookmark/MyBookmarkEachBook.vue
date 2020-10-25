@@ -11,12 +11,14 @@
         :key="bookmark.id"
         :text="bookmark.text"
         :page="bookmark.page"
+        @deleteBookmark="deleteBookmark(bookmark.id)"
       ></BookmarkView>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import DefaultBookIcon from '@/assets/random-book-cover.png';
 import BookInfo from '@/components/common/BookInfo';
 import BookmarkView from '@/components/common/BookmarkView';
@@ -37,6 +39,20 @@ export default {
     this.currentBookId = this.$route.query.bookId;
     this.currentBook = this.$route.query.book;
     this.bookmarks = this.$store.state.bookmark.filter((bookmark) => bookmark.book_id === this.currentBookId);
+  },
+  methods: {
+    deleteBookmark(bookmarkId) {
+      axios
+        .delete(`/api/bookmark/${bookmarkId}`)
+        .then((res) => {
+          if (res.data.ok) {
+            const idx = this.bookmarks.findIndex((bookmark) => bookmark.id === bookmarkId);
+            this.$delete(this.bookmarks, idx);
+            this.$store.commit('deleteBookmarkById', bookmarkId);
+          }
+        })
+        .catch((err) => alert(err));
+    },
   },
 };
 </script>
