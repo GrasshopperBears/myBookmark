@@ -9,7 +9,7 @@
 1. git clone
 2. root, root/client, root/server 디렉토리에서 `npm i` 실행
 3. MySQL Database 생성
-4. server root에 다음과 같은.env 파일 생성 [.evn gist link][https://gist.github.com/grasshopperbears/5f4eb20f94a6a26d911b87240f51ae79]
+4. server root에 다음과 같은.env 파일 생성 [.evn gist link](https://gist.github.com/grasshopperbears/5f4eb20f94a6a26d911b87240f51ae79)
 5. root 디렉토리에서 `npm run dev:server`, `npm run dev:client` 실행
 6. localhost:8080 혹은 client 실행 결과창의 host로 접속해서 실행
 
@@ -86,5 +86,5 @@
 | Client    | Vue, Vue Router, BootsrapVue                                                                                     |
 | DB        | MySQL 5.7.31                                                                                                     |
 | 상태 관리 | Vuex                                                                                                             |
-| OCR 인식  | NCloud CLOVA OCR [가이드][https://docs.ncloud.com/ko/ocr/ocr-1-1.html]                                           |
-| 도서 검색 | Kakao Daum 도서 검색 api [가이드][https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide#search-book] |
+| OCR 인식  | NCloud CLOVA OCR [가이드](https://docs.ncloud.com/ko/ocr/ocr-1-1.html)                                           |
+| 도서 검색 | Kakao Daum 도서 검색 api [가이드](https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide#search-book) |
