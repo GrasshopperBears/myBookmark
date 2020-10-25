@@ -14,7 +14,7 @@
           ><b-form-input id="custom-ocr--author" v-model="form.author" @keydown="changeBookState"></b-form-input
         ></b-col>
         <b-col cols="2"><label for="custom-ocr--page">페이지</label></b-col>
-        <b-col cols="3"><b-form-input id="custom-ocr--page" v-model="form.page"></b-form-input></b-col>
+        <b-col cols="3"><b-form-input type="number" id="custom-ocr--page" v-model="form.page"></b-form-input></b-col>
       </b-row>
     </div>
     <b-form-textarea
