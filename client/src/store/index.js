@@ -33,7 +33,7 @@ export const store = new Vuex.Store({
       state.ocrResult = newText;
     },
     addBookmark(state, newBookmark) {
-      state.bookmark.push(newBookmark);
+      state.bookmark.unshift(newBookmark);
     },
   },
 });

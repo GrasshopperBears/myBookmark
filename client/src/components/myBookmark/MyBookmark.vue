@@ -1,10 +1,10 @@
 <template>
   <div class="d-flex flex-row flex-wrap">
     <div
-      v-for="(book, id) in books"
+      v-for="{ id, book } in books"
       :key="id"
       class="my-bookmark-each d-flex flex-column align-items-center m-4"
-      @click="goEachBook(id)"
+      @click="goEachBook(id, book)"
     >
       <img
         :src="book.thumbnail_url ? book.thumbnail_url : defaultBookIcon"
@@ -29,16 +29,21 @@ export default {
   computed: {
     books() {
       const bookmarks = this.$store.state.bookmark;
+      const addedBooks = new Set();
       const books = bookmarks.reduce((acc, bookmark) => {
-        if (!acc[bookmark.book_id]) acc[bookmark.book_id] = bookmark.Book;
+        const bookId = bookmark.book_id;
+        if (!addedBooks.has(bookId)) {
+          acc.push({ id: bookId, book: bookmark.Book });
+          addedBooks.add(bookId);
+        }
         return acc;
-      }, {});
+      }, []);
       return books;
     },
   },
   methods: {
-    goEachBook(bookId) {
-      this.$router.push({ path: '/my-bookmark/book', query: { bookId, book: this.books[bookId] } });
+    goEachBook(bookId, book) {
+      this.$router.push({ path: '/my-bookmark/book', query: { bookId, book } });
     },
   },
 };
