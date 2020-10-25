@@ -20,6 +20,6 @@ router.get('/api/bookmark', searchBookmark, searchBookmarkController);
 router.post('/api/bookmark', addBook, addBookmark, addBookmarkController);
 router.post('/api/ocr', ocr, ocrController);
 router.delete('/api/bookmark/:id', deleteBookmarkById, deleteBookmarkController);
-router.delete('/api/bookmark/book/:id', deleteBookmarkByBookId, deleteBookmarkController);
+router.delete('/api/bookmark/book/:bookId', deleteBookmarkByBookId, deleteBookmarkController);
 
 module.exports = router;

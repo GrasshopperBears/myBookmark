@@ -15,7 +15,7 @@ exports.deleteBookmarkById = async (req, res, next) => {
 
 exports.deleteBookmarkByBookId = async (req, res, next) => {
   try {
-    await destroyBookmarkByBookId(req.body.uid, req.body.bookId);
+    await destroyBookmarkByBookId(req.body.uid, req.params.bookId);
     req.body.ok = true;
     next();
   } catch (e) {
