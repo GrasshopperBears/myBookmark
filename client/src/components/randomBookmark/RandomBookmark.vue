@@ -1,25 +1,18 @@
 <template>
   <div class="p-5 d-flex flex-row">
-    <div class="random__book-info-wrapper d-flex flex-column">
-      <div class="random__book-info--cover-wrapper mb-5 d-flex flex-row justify-content-center">
-        <img class="random__book-info--cover" :src="coverUrl" />
-      </div>
-      <div class="random__book-info-text-wrapper d-flex flex-column align-items-end">
-        <div class="random__book-info--title mb-3">{{ title }}</div>
-        <div class="random__book-info--authors">{{ authors }}</div>
-      </div>
-    </div>
+    <BookInfo :coverUrl="coverUrl" :title="title" :authors="authors"></BookInfo>
     <BookmarkView :text="text" :page="page"></BookmarkView>
   </div>
 </template>
 
 <script>
 import RandomBookIcon from '@/assets/random-book-cover.png';
+import BookInfo from '@/components/common/BookInfo';
 import BookmarkView from '@/components/common/BookmarkView';
 
 export default {
   name: 'RandomBookmark',
-  components: { BookmarkView },
+  components: { BookInfo, BookmarkView },
   data() {
     return {
       coverUrl: '',
@@ -65,18 +58,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.random__book-info--cover {
-  width: 8rem;
-}
-.random__book-info-text-wrapper {
-  width: 20rem;
-  .random__book-info--title {
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-  .random__book-info--authors {
-    font-size: 0.9rem;
-  }
-}
-</style>
+<style></style>

@@ -1,17 +1,10 @@
 <template>
   <div class="p-5 d-flex flex-row">
-    <div class="d-flex flex-column">
-      <div class="w-100 mb-5 d-flex flex-row justify-content-center">
-        <img
-          class="my-bookmark-each-book__book-cover"
-          :src="currentBook.thumbnail_url ? currentBook.thumbnail_url : defaultBookIcon"
-        />
-      </div>
-      <div class="my-bookmark-each__book-info-text-wrapper d-flex flex-column align-items-end">
-        <div class="my-bookmark-each__book-info--title mb-3">{{ currentBook.title }}</div>
-        <div class="my-bookmark-each__book-info--authors">{{ currentBook.authors }}</div>
-      </div>
-    </div>
+    <BookInfo
+      :coverUrl="currentBook.thumbnail_url ? currentBook.thumbnail_url : defaultBookIcon"
+      :title="currentBook.title"
+      :authors="currentBook.authors"
+    ></BookInfo>
     <div class="my-bookmark-each-book__bookmarks-wrapper d-flex flex-column w-100">
       <BookmarkView
         v-for="bookmark of bookmarks"
@@ -25,11 +18,12 @@
 
 <script>
 import DefaultBookIcon from '@/assets/random-book-cover.png';
+import BookInfo from '@/components/common/BookInfo';
 import BookmarkView from '@/components/common/BookmarkView';
 
 export default {
   name: 'MyBookmarkEachBook',
-  components: { BookmarkView },
+  components: { BookInfo, BookmarkView },
   data() {
     return {
       bookmarks: [],
