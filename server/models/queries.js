@@ -89,3 +89,22 @@ exports.findBookmark = async (uid) => {
     return e;
   }
 };
+
+exports.destroyBookmarkById = async (id, uid) => {
+  try {
+    const result = await Bookmark.destroy({ where: { id, uid } });
+    console.log(result);
+    return result;
+  } catch (e) {
+    return e;
+  }
+};
+
+exports.destroyBookmarkByBookId = async (uid, book_id) => {
+  try {
+    const result = await Bookmark.destroy({ where: { uid, book_id } });
+    return result;
+  } catch (e) {
+    return e;
+  }
+};
