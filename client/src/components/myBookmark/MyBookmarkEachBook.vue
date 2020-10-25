@@ -13,25 +13,23 @@
       </div>
     </div>
     <div class="my-bookmark-each-book__bookmarks-wrapper d-flex flex-column w-100">
-      <div
+      <BookmarkView
         v-for="bookmark of bookmarks"
         :key="bookmark.id"
-        class="my-bookmark-each-book__bookmark-each ml-5 mb-4 w-100 p-5"
-      >
-        <div>{{ bookmark.text }}</div>
-        <div v-if="bookmark.page" class="my-bookmark-each-book__bookmark--page text-right w-100">
-          {{ bookmark.page }}쪽
-        </div>
-      </div>
+        :text="bookmark.text"
+        :page="bookmark.page"
+      ></BookmarkView>
     </div>
   </div>
 </template>
 
 <script>
 import DefaultBookIcon from '@/assets/random-book-cover.png';
+import BookmarkView from '@/components/common/BookmarkView';
 
 export default {
   name: 'MyBookmarkEachBook',
+  components: { BookmarkView },
   data() {
     return {
       bookmarks: [],
@@ -61,16 +59,6 @@ export default {
   }
   .my-bookmark-each__book-info--authors {
     font-size: 0.9rem;
-  }
-}
-.my-bookmark-each-book__bookmark-each {
-  border: 1px solid rgba(128, 128, 128, 0.5);
-  border-radius: 5px;
-  font-family: 'Dovemayo-Medium';
-  font-size: 1.2rem;
-  .my-bookmark-each-book__bookmark--page {
-    color: gray;
-    font-size: 1rem;
   }
 }
 </style>

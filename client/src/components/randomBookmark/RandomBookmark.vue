@@ -9,18 +9,17 @@
         <div class="random__book-info--authors">{{ authors }}</div>
       </div>
     </div>
-    <div class="random__bookmark-wrapper ml-5 w-100 p-5 d-flex flex-column justify-content-between">
-      <div class="random__bookmark--text">{{ text }}</div>
-      <div v-if="page" class="random__bookmark--page text-right w-100">{{ page }}쪽</div>
-    </div>
+    <BookmarkView :text="text" :page="page"></BookmarkView>
   </div>
 </template>
 
 <script>
 import RandomBookIcon from '@/assets/random-book-cover.png';
+import BookmarkView from '@/components/common/BookmarkView';
 
 export default {
   name: 'RandomBookmark',
+  components: { BookmarkView },
   data() {
     return {
       coverUrl: '',
@@ -78,16 +77,6 @@ export default {
   }
   .random__book-info--authors {
     font-size: 0.9rem;
-  }
-}
-.random__bookmark-wrapper {
-  border: 1px solid rgba(128, 128, 128, 0.5);
-  border-radius: 5px;
-  font-family: 'Dovemayo-Medium';
-  font-size: 1.2rem;
-  .random__bookmark--page {
-    color: gray;
-    font-size: 1rem;
   }
 }
 </style>
