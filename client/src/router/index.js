@@ -5,6 +5,7 @@ import AddBookmark from '../components/addBookmark/AddBookmark';
 import RandomBookmark from '../components/randomBookmark/RandomBookmark';
 import BookmarkCalendar from '../components/bookmarkCalendar/BookmarkCalendar';
 import MyBookmark from '../components/myBookmark/MyBookmark';
+import MyBookmarkEachBook from '../components/myBookmark/MyBookmarkEachBook';
 import Signup from '../components/auth/Signup';
 import Signin from '../components/auth/Signin';
 
@@ -18,6 +19,7 @@ const router = new Router({
     },
     { path: '/random', component: RandomBookmark },
     { path: '/calendar', component: BookmarkCalendar },
+    { path: '/my-bookmark/book', component: MyBookmarkEachBook },
     { path: '/my-bookmark', component: MyBookmark },
     { path: '/signup', component: Signup },
     { path: '/signin', component: Signin },

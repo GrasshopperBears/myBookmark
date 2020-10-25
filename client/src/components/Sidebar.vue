@@ -91,6 +91,7 @@ export default {
   watch: {
     storeRoute(newPath, oldPath) {
       this.currentRoute = newPath;
+      this.selectedIndex = this.routers.findIndex((route) => route === this.currentRoute);
     },
   },
   methods: {
